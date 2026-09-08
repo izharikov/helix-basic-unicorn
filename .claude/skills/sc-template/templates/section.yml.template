@@ -1,0 +1,7 @@
+---
+ID: "{{SectionGuid}}"
+Parent: "{{TemplateGuid}}"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/{{Layer}}/{{Module}}/{{TemplateName}}/{{SectionName}}
+DB: master
+{{LanguagesBlock}}

@@ -1,0 +1,10 @@
+        public ActionResult {{ActionName}}()
+        {
+            var datasource = RenderingContext.Current.Rendering.Item ?? RenderingContext.Current.ContextItem;
+            if (datasource == null)
+            {
+                return null;
+            }
+
+            return View(new {{DatasourceModelInterface}}(datasource));
+        }

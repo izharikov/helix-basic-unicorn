@@ -1,0 +1,7 @@
+---
+ID: "{{StandardValuesGuid}}"
+Parent: "{{TemplateGuid}}"
+Template: "{{TemplateGuid}}"
+Path: /sitecore/templates/{{Layer}}/{{Module}}/{{TemplateName}}/__Standard Values
+DB: master
+{{SharedFieldsBlock}}{{LanguagesBlock}}

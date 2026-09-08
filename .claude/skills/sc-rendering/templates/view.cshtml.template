@@ -1,0 +1,5 @@
+﻿@model {{ModelNamespace}}.{{DatasourceModelInterface}}
+@using {{AssemblyName}}
+@using {{NamespacePrefix}}.Foundation.FieldRendering
+
+@* TODO: add view content. Render fields through @Html.Sitecore().Field(Templates...), never as literals. *@

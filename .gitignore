@@ -46,3 +46,6 @@ docker/license/
 # Container data volumes
 mssql-data/
 solr-data/
+
+# Local skill checks - not part of the skill package
+.claude/tests/
