@@ -1,0 +1,18 @@
+﻿---
+ID: "61423551-15bc-4e9f-ab7a-ec37f6ee1216"
+Parent: "97479c6b-bb30-4a15-afd1-2c89f207e9d6"
+Template: "68c367d4-4543-44c3-8567-184a7f593b18"
+Path: /sitecore/content/Basic Company/Home/Search
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260909T152907Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
