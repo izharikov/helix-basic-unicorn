@@ -44,13 +44,18 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Sitecore.Kernel" />
+    <!-- System.Web.Mvc, Version=5  DO NOT REMOVE: razorgenerator picks this up as an mvc project -->
+    <PackageReference Include="RazorGenerator.MsBuild" />
     <PackageReference Include="Sitecore.Mvc" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Config\Include\Feature\Feature.BasicContent.config" />
     <Content Include="App_Config\Include\Feature\Feature.BasicContent.Serialization.config" />
   </ItemGroup>
   <ItemGroup>
