@@ -5,13 +5,17 @@ Template: "63cd29ba-0e08-44d5-ab10-e05298a9818d"
 Path: /sitecore/content/Basic Company/Home
 DB: master
 SharedFields:
+- ID: "0b41fb8b-e7ef-414f-b23b-e39daf5a5dd7"
+  Hint: Exclude From Search
+  Type: Checkbox
+  Value: 1
 - ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
   Hint: __Masters
   Type: TreelistEx
   Value: |
     {B4649591-93B9-4151-8EBD-8AEA5BB2D5B1}
     {CF36F320-5A92-4E15-83FC-676820448A63}
-    {68C367D4-4543-44C3-8567-184A7F593B18}
+    {DF5ED07C-183D-40A4-AE00-D865D305DF40}
 - ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
   Hint: __Renderings
   Type: layout

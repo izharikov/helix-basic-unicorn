@@ -1,0 +1,26 @@
+﻿---
+ID: "a86a0cb8-9de1-4506-8074-34ec561c16a0"
+Parent: "6e93ebe5-8ca1-468c-97fb-d3dc876f730f"
+Template: "6e93ebe5-8ca1-468c-97fb-d3dc876f730f"
+Path: /sitecore/templates/Feature/Search/Search Results/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260909T165136Z
+    - ID: "52e227fd-9769-4c99-a06c-8827d118938e"
+      Hint: Results Per Page
+      Value: 9
+    - ID: "9bcab0bc-6000-408a-b16c-8785ac7ad7ec"
+      Hint: No Results Text
+      Value: No results found.
+    - ID: "a94479bd-e37f-4728-ad30-98900b3cbbca"
+      Hint: Title
+      Value: Search
+    - ID: "dad65b5f-bc1c-46d8-98c4-679d85b77b11"
+      Hint: Placeholder Text
+      Value: Search this site

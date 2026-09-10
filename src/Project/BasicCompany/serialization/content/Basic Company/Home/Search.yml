@@ -4,11 +4,35 @@ Parent: "97479c6b-bb30-4a15-afd1-2c89f207e9d6"
 Template: "68c367d4-4543-44c3-8567-184a7f593b18"
 Path: /sitecore/content/Basic Company/Home/Search
 DB: master
+SharedFields:
+- ID: "0b41fb8b-e7ef-414f-b23b-e39daf5a5dd7"
+  Hint: Exclude From Search
+  Type: Checkbox
+  Value: 1
 Languages:
 - Language: en
   Versions:
   - Version: 1
     Fields:
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Type: Layout
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1"
+          s:xsd="http://www.w3.org/2001/XMLSchema">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{2C0EA1AD-93B9-4AC5-AB8D-32DA7CE5383C}"
+              p:before="*"
+              s:ds="{4EB77F33-5EB0-4A85-AD70-4D0849ACC2DA}"
+              s:id="{995AF2F4-FD69-4EAB-A480-0963D7822C8C}"
+              s:par="CSSStyles"
+              s:ph="main"
+              s:ccb="Clear on publish" />
+          </d>
+        </r>
     - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
       Hint: __Created
       Value: 20260909T152907Z

@@ -43,6 +43,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Sitecore.ContentSearch" />
     <PackageReference Include="Sitecore.Kernel" />
     <!-- System.Web.Mvc, Version=5  DO NOT REMOVE: razorgenerator picks this up as an mvc project -->
     <PackageReference Include="RazorGenerator.MsBuild" />
@@ -59,7 +60,26 @@
     <Content Include="App_Config\Include\Feature\Feature.Search.Serialization.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Models\SearchResultPage.cs" />
+    <Compile Include="Models\SearchResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesConfigurator.cs" />
+    <Compile Include="Services\ISearchRepository.cs" />
+    <Compile Include="Services\PageSearchQuery.cs" />
+    <Compile Include="Services\SearchImageResolver.cs" />
+    <Compile Include="Services\SearchRepository.cs" />
+    <Compile Include="Templates.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Results.cshtml" />
+    <None Include="Views\web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Foundation\FieldRendering\website\BasicCompany.Foundation.FieldRendering.csproj">
+      <Project>{508c9659-2186-4655-b24a-f2de3744bab5}</Project>
+      <Name>BasicCompany.Foundation.FieldRendering</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="web.config" />

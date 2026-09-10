@@ -1,0 +1,21 @@
+﻿---
+ID: "4eb77f33-5eb0-4a85-ad70-4d0849acc2da"
+Parent: "684761a5-5487-4fa9-87ee-4c1838eda902"
+Template: "6e93ebe5-8ca1-468c-97fb-d3dc876f730f"
+Path: /sitecore/content/Basic Company/Home/Search/Page Components/Search Results
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260910T075725Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "b4827189-583e-4c09-93f2-f7163f50a318"
+      Hint: Search Root
+      Value: "{97479C6B-BB30-4A15-AFD1-2C89F207E9D6}"

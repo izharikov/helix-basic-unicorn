@@ -1,0 +1,129 @@
+﻿@model BasicCompany.Feature.Search.Models.SearchResults
+@using System
+@using System.Linq
+@using System.Web
+@using BasicCompany.Feature.Search
+@using BasicCompany.Feature.Search.Controllers
+@using BasicCompany.Feature.Search.Services
+@using BasicCompany.Foundation.FieldRendering
+@using Sitecore.Data
+@using Sitecore.Data.Items
+
+@{
+    var formAction = Request.Path;
+    var imageOptions = new Sitecore.Links.UrlBuilders.MediaUrlBuilderOptions
+    {
+        MaxWidth = 480,
+        AllowStretch = false,
+    };
+
+    Func<int, string> pageUrl = pageNumber => string.Format(
+        "{0}?{1}={2}&{3}={4}",
+        formAction,
+        SearchController.QueryParameter,
+        HttpUtility.UrlEncode(Model.Query),
+        SearchController.PageParameter,
+        pageNumber);
+
+    const string defaultImageUrl = "https://placehold.co/480x320";
+
+    Func<Item, string> resultImageUrl = item =>
+    {
+        var imageFieldId = SearchImageResolver.GetImageFieldId(item);
+        var mediaUrl = ID.IsNullOrEmpty(imageFieldId)
+            ? string.Empty
+            : Html.Sitecore().MediaUrl(imageFieldId, item, imageOptions);
+
+        return string.IsNullOrEmpty(mediaUrl) ? defaultImageUrl : mediaUrl;
+    };
+}
+
+<section class="search-results section">
+    <div class="container">
+        <h2 class="search-results-title title is-3 has-text-centered">
+            @Html.Sitecore().Field(Templates.SearchResults.Fields.Title, Model.Datasource)
+        </h2>
+
+        <form class="search-form box" method="get" action="@formAction">
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input is-medium" type="search" name="@SearchController.QueryParameter" value="@Model.Query"
+                           placeholder="@Model.Datasource[Templates.SearchResults.Fields.PlaceholderText]" />
+                </div>
+                <div class="control">
+                    <button class="button is-black is-medium" type="submit">
+                        @Sitecore.Globalization.Translate.Text("Search-Results-Submit")
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        @if (!Model.Results.Any())
+        {
+            <div class="search-results-empty notification is-light has-text-centered">
+                @Html.Sitecore().Field(Templates.SearchResults.Fields.NoResultsText, Model.Datasource)
+            </div>
+        }
+        else
+        {
+            <p class="search-results-count has-text-grey has-text-centered">
+                @Model.TotalResults @Sitecore.Globalization.Translate.Text("Search-Results-Count")
+            </p>
+
+            <div class="search-results-columns columns is-multiline">
+                @foreach (var result in Model.Results)
+                {
+                    <a href="@Html.Sitecore().ItemUrl(result)" class="column search-result-column is-4-desktop is-6-tablet">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure style="background-image: url(@resultImageUrl(result))"></figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="content">
+                                    <h4>
+                                        @if (string.IsNullOrEmpty(result[Templates.Searchable.Fields.SearchTitle]))
+                                        {
+                                            @result.DisplayName
+                                        }
+                                        else
+                                        {
+                                            @Html.Sitecore().Field(Templates.Searchable.Fields.SearchTitle, result)
+                                        }
+                                    </h4>
+                                    <p>@Html.Sitecore().Field(Templates.Searchable.Fields.SearchSummary, result)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+
+            if (Model.TotalPages > 1)
+            {
+                <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <a class="pagination-previous" href="@pageUrl(Model.Page - 1)">
+                            @Sitecore.Globalization.Translate.Text("Search-Results-Previous")
+                        </a>
+                    }
+                    @if (Model.HasNextPage)
+                    {
+                        <a class="pagination-next" href="@pageUrl(Model.Page + 1)">
+                            @Sitecore.Globalization.Translate.Text("Search-Results-Next")
+                        </a>
+                    }
+                    <ul class="pagination-list">
+                        @for (var pageNumber = 1; pageNumber <= Model.TotalPages; pageNumber++)
+                        {
+                            <li>
+                                <a class="pagination-link @(pageNumber == Model.Page ? "is-current" : string.Empty)"
+                                   href="@pageUrl(pageNumber)" aria-label="@pageNumber">@pageNumber</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            }
+        }
+    </div>
+</section>

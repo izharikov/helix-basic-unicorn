@@ -1,0 +1,14 @@
+﻿---
+ID: "684761a5-5487-4fa9-87ee-4c1838eda902"
+Parent: "61423551-15bc-4e9f-ab7a-ec37f6ee1216"
+Template: "7ba26fb3-7ab2-4e09-bb5a-e9d6cd048bba"
+Path: /sitecore/content/Basic Company/Home/Search/Page Components
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20190312T172701Z

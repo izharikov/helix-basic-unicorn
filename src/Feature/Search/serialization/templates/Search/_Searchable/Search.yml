@@ -1,0 +1,14 @@
+﻿---
+ID: "198efed9-8d61-471e-8829-067e4da28544"
+Parent: "7d7e26a9-d499-4ee5-9858-b5e9331bab1d"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Feature/Search/_Searchable/Search
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260909T165143Z

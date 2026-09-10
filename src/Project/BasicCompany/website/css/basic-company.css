@@ -7219,3 +7219,69 @@ label.panel-block {
 
 .navbar + .container {
   margin-top: 50px; }
+
+.search-results-title {
+  letter-spacing: 4px;
+  margin-bottom: 30px; }
+
+.search-form {
+  max-width: 640px;
+  margin: 0 auto 30px auto;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2); }
+  .search-form .input {
+    letter-spacing: 2px; }
+  .search-form .button {
+    letter-spacing: 2px; }
+
+.search-results-count {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 19px;
+  margin-bottom: 20px; }
+
+.search-results-empty {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 19px; }
+
+.search-results-columns {
+  margin: 20px 0; }
+
+.search-result-column {
+  margin: 10px;
+  padding: 0;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out; }
+  .search-result-column:hover {
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px); }
+  .search-result-column .card {
+    height: 340px; }
+  .search-result-column .card-image figure {
+    background-position: center;
+    background-size: cover; }
+  .search-result-column .card-content {
+    height: 120px;
+    overflow: hidden;
+    text-align: left; }
+    .search-result-column .card-content h4 {
+      margin-bottom: 8px; }
+
+@media screen and (min-width: 769px), print {
+  .search-result-column.is-6-tablet {
+    width: calc(50% - 20px); } }
+
+@media screen and (min-width: 1088px) {
+  .search-result-column.is-4-desktop {
+    width: calc(33.33333% - 20px); } }
+
+.search-results .pagination {
+  margin-top: 30px; }
+  .search-results .pagination-link,
+  .search-results .pagination-previous,
+  .search-results .pagination-next {
+    font-size: 12px;
+    letter-spacing: 2px; }
