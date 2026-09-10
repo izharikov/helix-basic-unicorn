@@ -1,0 +1,6 @@
+<Project>
+  <!-- this is used to hide duplicated items in the solution explorer -->
+  <PropertyGroup>
+    <PrecompileRazorFiles Condition=" '$(PrecompileRazorFiles)' == '' ">false</PrecompileRazorFiles>
+  </PropertyGroup>
+</Project>

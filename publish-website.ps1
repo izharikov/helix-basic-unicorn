@@ -93,7 +93,8 @@ $publishArgs = @(
     "/p:DebugSymbols=$debugSymbols",
     "/p:DebugType=$debugType",
     "/p:DefineDebug=$defineDebug",
-    "/p:AutoPublish=false"
+    "/p:AutoPublish=false",
+    "/p:PrecompileRazorFiles=true"
 )
 
 if ($debugSymbols -eq "false") {
