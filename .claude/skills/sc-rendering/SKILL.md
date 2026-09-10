@@ -13,7 +13,8 @@ powershell -File .claude/skills/sc-rendering/New-Rendering.ps1 -Module Accordion
 ```
 
 - `-Layer Foundation` - defaults to `Feature`
-- `-DatasourceLocation "site:custom"` - defaults to the configured value
+- `-DatasourceLocation "<item path or query: expression>"` - defaults to the configured value
+- `-Icon "Office/16x16/book.png"` - defaults to the configured value, omitted when neither is set
 - `-SkipPlaceholder` - do not register the rendering in placeholder settings
 
 Exit code **2** means the script needs something from you - it prints what, and writes nothing.

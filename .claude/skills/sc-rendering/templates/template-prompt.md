@@ -40,6 +40,7 @@ in Rainbow's format and may arrive quoted or as a block scalar:
 | `{{ParentGuid}}` | the folder GUID, read from a sibling rendering |
 | `{{DatasourceTemplatePath}}` | the `-DatasourceTemplatePath` argument |
 | `{{DatasourceLocation}}` | `-DatasourceLocation`, else `rendering.defaultDatasourceLocation` |
+| `{{IconBlock}}` | the whole `__Icon` field entry from `-Icon`, else `rendering.defaultIcon`, else nothing |
 | `{{LanguagesBlock}}` | the whole `Languages:` section, one block per configured language |
 | `{{Timestamp}}` | `yyyyMMddTHHmmssZ`, UTC |
 

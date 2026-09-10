@@ -49,7 +49,7 @@ docker rm sc-extract
 | Which processors run in a pipeline, and in what order | `App_Config/Sitecore/**/*.config` |
 | What a setting defaults to | `App_Config/Sitecore/**/*.config`, `<settings>` |
 | How a backend UI page is built | `sitecore/shell/**` |
-| What an assembly actually does | Decompile it - see the `ilspy-decompile` skill |
+| What an assembly actually does | Decompile that one type - see the `ilspy-decompile` skill |
 
 Use a copy with **no project patches on top of it**: it answers "what does Sitecore do by default",
 which is the question. What your solution does is already in the repository.
@@ -59,4 +59,5 @@ which is the question. What your solution does is already in the repository.
 - **Never cite a project `bin/` or `obj/` folder as platform source.** Stale build output, often
   copied from other modules.
 - Prefer the shipped configuration over any blog post when the two disagree.
-- If the answer is not in the files, decompile rather than guessing an API shape.
+- If config and views leave a specific type's behaviour unexplained, decompile that type - see
+  `ilspy-decompile`. Do not decompile to check an API shape.

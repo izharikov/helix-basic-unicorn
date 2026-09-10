@@ -61,6 +61,8 @@ already does the whole job.
 - Context-menu / ribbon scripts get the clicked item from `Get-Item .`.
 - `Get-Item -Path` needs a database prefix (`master:\content\home`) unless `-Database` given.
 - No `Set-ItemField` — three documented ways to set a field value, see `commands.md`.
-- Full Sitecore .NET API is in scope (`[Sitecore.Configuration.Settings]::GetSetting(...)`),
-  so `ilspy-decompile` / `sitecore-platform` still apply.
+- Full Sitecore .NET API is reachable (`[Sitecore.Configuration.Settings]::GetSetting(...)`), but
+  reach for it only when no SPE cmdlet does the job - check `commands.md` and the docs first.
+  Once genuinely in .NET API territory, `sitecore-platform` answers config questions; decompile
+  only a type whose behaviour those files leave unexplained.
 - Users, roles and profiles fail silently — see the Traps in `commands.md` before touching them.

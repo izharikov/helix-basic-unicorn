@@ -5,13 +5,9 @@ Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
 Path: /sitecore/layout/Renderings/{{Layer}}/{{Module}}/{{RenderingName}}
 DB: master
 SharedFields:
-- ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
+{{IconBlock}}- ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
   Hint: Datasource Template
   Value: {{DatasourceTemplatePath}}
-- ID: "1c307764-806c-42f0-b7ce-fc173ac8372b"
-  Hint: Supports Local Datasource
-  Type: Checkbox
-  Value: 1
 - ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
   Hint: Datasource Location
   Value: {{DatasourceLocation}}

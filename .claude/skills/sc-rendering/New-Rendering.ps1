@@ -7,24 +7,62 @@
     [Parameter(Mandatory)] [string] $DatasourceModelInterface,
     [string] $Layer = "Feature",
     [string] $DatasourceLocation,
+    [string] $Icon,
     [switch] $SkipPlaceholder
 )
 
 $ErrorActionPreference = "Stop"
+
+function ConvertTo-ItemPath {
+    param([Parameter(Mandatory)] [AllowEmptyString()] [string] $Path)
+
+    $match = [regex]::Match($Path.Replace('\', '/'), '(?i)/sitecore/.*$')
+    if ($match.Success) { return $match.Value }
+    return $Path
+}
+
+$DatasourceTemplatePath = ConvertTo-ItemPath $DatasourceTemplatePath
+if ($DatasourceLocation) { $DatasourceLocation = ConvertTo-ItemPath $DatasourceLocation }
 
 $script:Defaults = @{
     namespacePrefix = $null
     languages       = @("en")
     serialization   = @{ root = $null; renderings = $null }
     website         = @{ root = "src/{layer}/{module}/website"; csproj = "src/{layer}/{module}/website/{prefix}.{layer}.{module}.csproj"; views = "Views" }
-    rendering       = @{ defaultDatasourceLocation = "site:content"; placeholderSettings = $null; controllerNamespace = "{prefix}.{layer}.{module}.Controllers"; modelNamespace = "{prefix}.{layer}.{module}.Models" }
+    rendering       = @{ defaultDatasourceLocation = $null; defaultIcon = $null; placeholderSettings = $null; controllerNamespace = "{prefix}.{layer}.{module}.Controllers"; modelNamespace = "{prefix}.{layer}.{module}.Models" }
 }
 
-$script:Required = @("namespacePrefix", "serialization.root", "serialization.renderings")
+$script:Required = @("namespacePrefix", "serialization.root", "serialization.renderings", "rendering.defaultDatasourceLocation")
+
+function Find-DatasourceLocation {
+    try {
+        $src = Join-Path (Get-RepoRoot) "src"
+        if (!(Test-Path $src)) { return @() }
+
+        $values = Get-ChildItem -Path $src -Recurse -Filter "*.yml" -File -ErrorAction SilentlyContinue |
+            Where-Object { $_.FullName -notmatch '\\(obj|bin|node_modules)\\' } |
+            ForEach-Object {
+                $match = [regex]::Match((Get-Content $_.FullName -Raw),
+                    '(?m)^- ID: "b5b27af1-25ef-405c-87ce-369b3a004016"\r?\n\s+Hint: Datasource Location\r?\n\s+Value: (.+?)\r?$')
+                if ($match.Success) { $match.Groups[1].Value.Trim() }
+            }
+
+        return @($values | Where-Object { $_ } | Group-Object | Sort-Object Count -Descending |
+            Select-Object -First 3 | ForEach-Object { "$($_.Name)   ($($_.Count) rendering(s))" })
+    } catch { return @() }
+}
 
 function Show-ConfigRequest([string] $Reason) {
     $file = Join-Path $PSScriptRoot "config.json"
     Write-Host "[CONFIG] $Reason" -ForegroundColor Yellow
+
+    $observed = Find-DatasourceLocation
+    if ($observed) {
+        Write-Host ""
+        Write-Host "Datasource Location values already in this solution:" -ForegroundColor Yellow
+        foreach ($value in $observed) { Write-Host "  $value" -ForegroundColor Yellow }
+    }
+
     Write-Host @"
 
 Write $file from this solution, then run the command again:
@@ -46,7 +84,10 @@ Write $file from this solution, then run the command again:
     "views": "Views"                  folder under the website root holding .cshtml views
   },
   "rendering": {
-    "defaultDatasourceLocation": "site:content",   the Datasource Location on existing renderings
+    "defaultDatasourceLocation": "",   copy verbatim from the Datasource Location field
+                                      (b5b27af1-25ef-405c-87ce-369b3a004016) of an existing
+                                      rendering .yml - the value most of them share
+    "defaultIcon": null,              __Icon for new renderings, or null to write none
     "placeholderSettings": null,      repo-relative .yml of the placeholder settings item new
                                       renderings are registered in, or null to register by hand
     "controllerNamespace": "{prefix}.{layer}.{module}.Controllers",
@@ -163,6 +204,7 @@ $missingTemplates = @("view.cshtml.template", "action.cs.template") |
 if ($missingTemplates) { Show-TemplateRequest $missingTemplates }
 
 if (!$DatasourceLocation) { $DatasourceLocation = $config.rendering.defaultDatasourceLocation }
+if (!$Icon) { $Icon = $config.rendering.defaultIcon }
 
 $serializationRoot = Join-Path $repoRoot (Expand-ConfigPath $config.serialization.root)
 $renderingsDir     = Join-Path $serializationRoot (Expand-ConfigPath $config.serialization.renderings)
@@ -184,6 +226,10 @@ $renderingGuid      = [guid]::NewGuid().ToString("D")
 $renderingGuidUpper = "{$($renderingGuid.ToUpper())}"
 $timestamp          = (Get-Date).ToUniversalTime().ToString("yyyyMMdd'T'HHmmss'Z'")
 
+$iconBlock = if ($Icon) {
+    "- ID: `"06d5295c-ed2f-4a54-9bf2-26228d113318`"`r`n  Hint: __Icon`r`n  Value: $(Format-RainbowValue -Value $Icon)`r`n"
+} else { "" }
+
 function Expand-Template([string] $TemplateFile) {
     $expanded = (Get-Content -Path (Join-Path $PSScriptRoot "templates/$TemplateFile") -Raw) `
         -replace '\{\{RenderingGuid\}\}',            $renderingGuid `
@@ -200,6 +246,7 @@ function Expand-Template([string] $TemplateFile) {
         -replace '\{\{DatasourceTemplatePath\}\}',   (Format-RainbowValue -Value $DatasourceTemplatePath) `
         -replace '\{\{DatasourceModelInterface\}\}', $DatasourceModelInterface `
         -replace '\{\{DatasourceLocation\}\}',       (Format-RainbowValue -Value $DatasourceLocation) `
+        -replace '\{\{IconBlock\}\}',                $iconBlock `
         -replace '\{\{LanguagesBlock\}\}',           (New-LanguageBlock $timestamp) `
         -replace '\{\{Timestamp\}\}',                $timestamp
 
