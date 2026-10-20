@@ -1,5 +1,7 @@
 /data/cm/*
 !/data/cm/.gitkeep
+/data/cm_aspnet_temp/*
+!/data/cm_aspnet_temp/.gitkeep
 /data/cd/*
 !/data/cd/.gitkeep
 /data/mssql/*

@@ -107,6 +107,7 @@ services:
       - ${LOCAL_ITEM_PATH}:c:\items-mounted
       - .\docker\build\cm:C:\scripts-mounted
       - ${HOST_LICENSE_FOLDER}:C:\license
+      - ${LOCAL_DATA_PATH}\cm_aspnet_temp:C:\aspnet-temp
     environment:
       BASIC_COMPANY_URL: ${CM_SITE_HOST}
       BASIC_COMPANY_DATABASE: ${CM_SITE_DATABASE}
@@ -114,6 +115,7 @@ services:
       SITECORE_LICENSE_LOCATION: C:\license\license.xml
       UNICORN_SHARED_SECRET: ${UNICORN_SHARED_SECRET}
       UNICORN_ENABLE_TRANSPARENT_SYNC: ${UNICORN_ENABLE_TRANSPARENT_SYNC}
+      ASPNET_TEMP_DIRECTORY: C:\aspnet-temp
       SITECORE_DEVELOPMENT_PATCHES: CustomErrorsOff,DiagnosticsOff,DeviceDetectionOff,RobotDetectionOff
     entrypoint: ["powershell", "-Command", "& C:/scripts-mounted/Start.ps1"]
     healthcheck:
