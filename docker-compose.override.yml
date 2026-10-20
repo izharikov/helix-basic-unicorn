@@ -61,6 +61,11 @@ services:
       - ${HOST_LICENSE_FOLDER}:C:\license
     environment:
       SITECORE_LICENSE_LOCATION: C:\license\license.xml
+    healthcheck:
+      test: ["CMD", "pwsh", "-NoProfile", "-Command", "if (Get-Process Sitecore.IdentityServer.Host -ErrorAction SilentlyContinue) { exit 0 } else { exit 1 }"]
+      interval: 10s
+      start_period: 60s
+      start_interval: 1s
 
   cd:
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-xm1-cd:${VERSION:-latest}
