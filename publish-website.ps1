@@ -112,3 +112,8 @@ Write-Host $projectFile -ForegroundColor Green
 Write-Host "to folder:" -ForegroundColor Green
 Write-Host $deployFolder -ForegroundColor Green
 Write-Host "successfully." -ForegroundColor Green
+
+$envFile = "$root\.env"
+if ((Test-Path $envFile) -and (Select-String -Path $envFile -Pattern '^\s*FILLER\s*=\s*1\s*$' -Quiet)) {
+    & "$root\docker\filler.ps1" -Path $deployFolder
+}

@@ -110,3 +110,9 @@ services:
       UNICORN_ENABLE_TRANSPARENT_SYNC: ${UNICORN_ENABLE_TRANSPARENT_SYNC}
       SITECORE_DEVELOPMENT_PATCHES: CustomErrorsOff
     entrypoint: ["powershell", "-Command", "& C:/tools/entrypoints/iis/Development.ps1"]
+    healthcheck:
+      timeout: 3s
+      interval: 10s
+      retries: 30
+      start_period: 180s
+      start_interval: 2s
