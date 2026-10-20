@@ -82,7 +82,7 @@ services:
       BASIC_COMPANY_DATABASE: ${SITE_DATABASE}
       SITECORE_LICENSE_LOCATION: C:\license\license.xml
       SITECORE_DEVELOPMENT_PATCHES: CustomErrorsOff
-    entrypoint: ["powershell", "-Command", "& C:/tools/entrypoints/iis/Development.ps1"]
+    entrypoint: ["powershell", "-Command", "& C:/scripts/Start.ps1"]
     labels:
       - "traefik.http.routers.cd-secure.rule=Host(`${SITE_HOST}`) || Host(`${CD_HOST}`)"
 
@@ -100,6 +100,7 @@ services:
       - ${LOCAL_DEPLOY_PATH}\website:C:\deploy
       - ${LOCAL_DATA_PATH}\cm:C:\inetpub\wwwroot\App_Data\logs
       - ${LOCAL_ITEM_PATH}:c:\items-mounted
+      - .\docker\build\cm:C:\scripts-mounted
       - ${HOST_LICENSE_FOLDER}:C:\license
     environment:
       BASIC_COMPANY_URL: ${CM_SITE_HOST}
@@ -109,7 +110,7 @@ services:
       UNICORN_SHARED_SECRET: ${UNICORN_SHARED_SECRET}
       UNICORN_ENABLE_TRANSPARENT_SYNC: ${UNICORN_ENABLE_TRANSPARENT_SYNC}
       SITECORE_DEVELOPMENT_PATCHES: CustomErrorsOff
-    entrypoint: ["powershell", "-Command", "& C:/tools/entrypoints/iis/Development.ps1"]
+    entrypoint: ["powershell", "-Command", "& C:/scripts-mounted/Start.ps1"]
     healthcheck:
       timeout: 3s
       interval: 10s
