@@ -16,6 +16,7 @@ services:
 
   redis:
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-redis:${VERSION:-latest}
+    scale: 0
     build:
       context: ./docker/build/redis
       args:
