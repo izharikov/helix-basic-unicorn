@@ -8,6 +8,7 @@ namespace BasicCompany.Feature.Search
         public void Configure(IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient<Controllers.SearchController>();
+            serviceCollection.AddTransient<Controllers.SearchSuggestController>();
             serviceCollection.AddTransient<Services.ISearchRepository, Services.SearchRepository>();
         }
     }

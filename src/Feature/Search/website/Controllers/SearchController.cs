@@ -1,7 +1,9 @@
 using System.Diagnostics;
 using System.Web.Mvc;
 using BasicCompany.Feature.Search.Models;
+using BasicCompany.Feature.Search.Pipelines;
 using BasicCompany.Feature.Search.Services;
+using Sitecore.Abstractions;
 using Sitecore.Data.Fields;
 using Sitecore.Data.Items;
 using Sitecore.Mvc.Presentation;
@@ -14,13 +16,42 @@ namespace BasicCompany.Feature.Search.Controllers
         public const string PageParameter = "page";
 
         private const int DefaultPageSize = 9;
+        private const int DefaultMinCharacters = 2;
+        private const int DefaultMaxSuggestions = 5;
 
         protected readonly ISearchRepository SearchRepository;
+        protected readonly BaseLinkManager LinkManager;
 
-        public SearchController(ISearchRepository searchRepository)
+        public SearchController(ISearchRepository searchRepository, BaseLinkManager linkManager)
         {
             Debug.Assert(searchRepository != null);
+            Debug.Assert(linkManager != null);
             SearchRepository = searchRepository;
+            LinkManager = linkManager;
+        }
+
+        public ActionResult Box()
+        {
+            var datasource = RenderingContext.Current.Rendering.Item;
+            if (datasource == null || !datasource.DescendsFrom(Templates.SearchBox.Id))
+            {
+                return null;
+            }
+
+            var searchPage = ((ReferenceField)datasource.Fields[Templates.SearchBox.Fields.SearchPage])?.TargetItem;
+            if (searchPage == null)
+            {
+                return null;
+            }
+
+            return View(new SearchBox
+            {
+                Datasource = datasource,
+                SearchPageUrl = LinkManager.GetItemUrl(searchPage),
+                SuggestUrl = "/" + RegisterRoutes.SuggestUrl,
+                MinCharacters = GetPositiveInt(datasource, Templates.SearchBox.Fields.MinCharacters, DefaultMinCharacters),
+                MaxSuggestions = GetPositiveInt(datasource, Templates.SearchBox.Fields.MaxSuggestions, DefaultMaxSuggestions)
+            });
         }
 
         public ActionResult Results()
@@ -67,6 +98,17 @@ namespace BasicCompany.Feature.Search.Controllers
             }
 
             return pageSize;
+        }
+
+        protected virtual int GetPositiveInt(Item datasource, Sitecore.Data.ID fieldId, int defaultValue)
+        {
+            int value;
+            if (!int.TryParse(datasource[fieldId], out value) || value < 1)
+            {
+                return defaultValue;
+            }
+
+            return value;
         }
 
         protected virtual Item GetSearchRoot(Item datasource)

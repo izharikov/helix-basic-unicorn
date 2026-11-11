@@ -7285,3 +7285,13 @@ label.panel-block {
   .search-results .pagination-next {
     font-size: 12px;
     letter-spacing: 2px; }
+
+.search-box .dropdown,
+.search-box .dropdown-trigger {
+  width: 100%; }
+
+.search-box .dropdown-menu {
+  min-width: 100%; }
+
+.search-box .dropdown-item {
+  white-space: normal; }

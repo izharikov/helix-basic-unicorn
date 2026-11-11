@@ -1,0 +1,20 @@
+﻿---
+ID: "39405eab-d211-4d9a-8712-80c6b6ad1b4f"
+Parent: "53814a5e-4598-4838-b1bd-adc1f546e10a"
+Template: "53814a5e-4598-4838-b1bd-adc1f546e10a"
+Path: /sitecore/templates/Feature/Search/Search Box/__Standard Values
+DB: master
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20261111T123433Z
+    - ID: "4bb2ad7b-d842-4d12-959f-f9e84132c4bc"
+      Hint: Min Characters
+      Value: 2
+    - ID: "e9f42ed3-117f-4d1a-8e84-c41b8f8b2277"
+      Hint: Max Suggestions
+      Value: 5

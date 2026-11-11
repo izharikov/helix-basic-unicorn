@@ -1,0 +1,30 @@
+﻿---
+ID: "b20b35ed-d281-44a1-82fe-a5ef24e68aed"
+Parent: "fda71ed3-d551-4001-a822-4ee68d089efb"
+Template: "2a3e91a0-7987-44b5-ab34-35c2d9de83b9"
+Path: /sitecore/layout/Renderings/Feature/Search/Search Box
+DB: master
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Office/16x16/magnifying_glass.png
+- ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
+  Hint: Datasource Template
+  Value: /sitecore/templates/Feature/Search/Search Box
+- ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
+  Hint: Datasource Location
+  Value: "query:./ancestor-or-self::*[@@templatename='Site']/Shared Content"
+- ID: "ded9e431-3604-4921-a4b3-a6ec7636a5b6"
+  Hint: Controller Action
+  Value: Box
+- ID: "e64ad073-dfcc-4d20-8c0b-fe5aa6226cd7"
+  Hint: Controller
+  Value: BasicCompany.Feature.Search.Controllers.SearchController, BasicCompany.Feature.Search
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20261111T123505Z

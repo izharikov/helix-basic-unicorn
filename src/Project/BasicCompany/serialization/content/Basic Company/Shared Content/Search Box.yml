@@ -1,0 +1,21 @@
+﻿---
+ID: "b5b68c5d-4beb-4bb1-a387-ee38af6e8b50"
+Parent: "0667b089-4a7d-4d1e-9b06-27a1bf8b9e8f"
+Template: "53814a5e-4598-4838-b1bd-adc1f546e10a"
+Path: /sitecore/content/Basic Company/Shared Content/Search Box
+DB: master
+SharedFields:
+- ID: "2352612c-5169-41fd-ae0a-7ea30bfb78a5"
+  Hint: Search Page
+  Value: "{61423551-15BC-4E9F-AB7A-EC37F6EE1216}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20261111T120000Z
+    - ID: "b299ac39-d9dd-4a1c-9444-223fc7e8ff5e"
+      Hint: Placeholder Text
+      Value: Search...

@@ -12,6 +12,8 @@ namespace BasicCompany.Feature.Search.Services
         public virtual IEnumerable<ID> Paths { get; set; }
         [IndexField("_templates")]
         public virtual IEnumerable<ID> Templates { get; set; }
+        [IndexField("search title")]
+        public virtual string SearchTitle { get; set; }
         [IndexField("_content")]
         public virtual string Content { get; set; }
         [IndexField("_latestversion")]

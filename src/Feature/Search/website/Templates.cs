@@ -30,5 +30,18 @@ namespace BasicCompany.Feature.Search
                 public static readonly ID NoResultsText = new ID("{9BCAB0BC-6000-408A-B16C-8785AC7AD7EC}");
             }
         }
+
+        public static class SearchBox
+        {
+            public static readonly ID Id = new ID("{53814A5E-4598-4838-B1BD-ADC1F546E10A}");
+
+            public static class Fields
+            {
+                public static readonly ID SearchPage = new ID("{2352612C-5169-41FD-AE0A-7EA30BFB78A5}");
+                public static readonly ID PlaceholderText = new ID("{B299AC39-D9DD-4A1C-9444-223FC7E8FF5E}");
+                public static readonly ID MinCharacters = new ID("{4BB2AD7B-D842-4D12-959F-F9E84132C4BC}");
+                public static readonly ID MaxSuggestions = new ID("{E9F42ED3-117F-4D1A-8E84-C41B8F8B2277}");
+            }
+        }
     }
 }

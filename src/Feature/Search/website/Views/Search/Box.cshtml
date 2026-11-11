@@ -1,0 +1,30 @@
+﻿@model BasicCompany.Feature.Search.Models.SearchBox
+@using BasicCompany.Feature.Search
+@using BasicCompany.Feature.Search.Controllers
+@using BasicCompany.Foundation.FieldRendering
+
+<form class="search-box navbar-item" method="get" action="@Model.SearchPageUrl" role="search"
+      data-suggest-url="@Model.SuggestUrl"
+      data-min-chars="@Model.MinCharacters"
+      data-max="@Model.MaxSuggestions"
+      data-no-results="@Sitecore.Globalization.Translate.Text("Search-Box-No-Results")">
+    <div class="dropdown">
+        <div class="dropdown-trigger">
+            <div class="field has-addons">
+                <div class="control">
+                    <input class="input is-small search-box-input" type="search" name="@SearchController.QueryParameter"
+                           autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false"
+                           placeholder="@Model.Datasource[Templates.SearchBox.Fields.PlaceholderText]" />
+                </div>
+                <div class="control">
+                    <button class="button is-small is-white" type="submit">
+                        @Sitecore.Globalization.Translate.Text("Search-Box-Submit")
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-menu" role="listbox">
+            <div class="dropdown-content search-box-suggestions"></div>
+        </div>
+    </div>
+</form>

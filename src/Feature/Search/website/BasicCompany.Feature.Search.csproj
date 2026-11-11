@@ -61,8 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SearchSuggestController.cs" />
+    <Compile Include="Models\SearchBox.cs" />
     <Compile Include="Models\SearchResultPage.cs" />
     <Compile Include="Models\SearchResults.cs" />
+    <Compile Include="Pipelines\RegisterRoutes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesConfigurator.cs" />
     <Compile Include="Services\ISearchRepository.cs" />
@@ -73,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Search\Results.cshtml" />
+    <Content Include="Views\Search\Box.cshtml" />
     <None Include="Views\web.config" />
   </ItemGroup>
   <ItemGroup>
