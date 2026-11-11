@@ -16,6 +16,7 @@ services:
 
   redis:
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-redis:${VERSION:-latest}
+    scale: 0
     build:
       context: ./docker/build/redis
       args:
@@ -30,6 +31,9 @@ services:
     mem_limit: 2GB
     volumes:
       - ${LOCAL_DATA_PATH}\mssql:c:\data
+    healthcheck:
+      start_period: 60s
+      start_interval: 1s
 
   mssql-init:
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-xm1-mssql-init:${VERSION:-latest}
@@ -38,10 +42,15 @@ services:
       args:
         BASE_IMAGE: ${SITECORE_DOCKER_REGISTRY}sitecore-xm1-mssql-init:${SITECORE_VERSION}
     mem_limit: 2GB
+    healthcheck:
+      start_interval: 1s
 
   solr:
     volumes:
       - ${LOCAL_DATA_PATH}\solr:c:\data
+    healthcheck:
+      start_period: 60s
+      start_interval: 1s
 
   solr-init:
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-xm1-solr-init:${VERSION:-latest}
@@ -61,6 +70,11 @@ services:
       - ${HOST_LICENSE_FOLDER}:C:\license
     environment:
       SITECORE_LICENSE_LOCATION: C:\license\license.xml
+    healthcheck:
+      test: ["CMD", "pwsh", "-NoProfile", "-Command", "if (Get-Process Sitecore.IdentityServer.Host -ErrorAction SilentlyContinue) { exit 0 } else { exit 1 }"]
+      interval: 10s
+      start_period: 60s
+      start_interval: 1s
 
   cd:
     image: ${REGISTRY}${COMPOSE_PROJECT_NAME}-xm1-cd:${VERSION:-latest}
@@ -81,8 +95,8 @@ services:
       BASIC_COMPANY_URL: ${SITE_HOST}
       BASIC_COMPANY_DATABASE: ${SITE_DATABASE}
       SITECORE_LICENSE_LOCATION: C:\license\license.xml
-      SITECORE_DEVELOPMENT_PATCHES: CustomErrorsOff
-    entrypoint: ["powershell", "-Command", "& C:/tools/entrypoints/iis/Development.ps1"]
+      SITECORE_DEVELOPMENT_PATCHES: CustomErrorsOff,DiagnosticsOff,DeviceDetectionOff,RobotDetectionOff,InitMessagesOff
+    entrypoint: ["powershell", "-Command", "& C:/scripts/Start.ps1"]
     labels:
       - "traefik.http.routers.cd-secure.rule=Host(`${SITE_HOST}`) || Host(`${CD_HOST}`)"
 
@@ -100,7 +114,9 @@ services:
       - ${LOCAL_DEPLOY_PATH}\website:C:\deploy
       - ${LOCAL_DATA_PATH}\cm:C:\inetpub\wwwroot\App_Data\logs
       - ${LOCAL_ITEM_PATH}:c:\items-mounted
+      - .\docker\build\cm:C:\scripts-mounted
       - ${HOST_LICENSE_FOLDER}:C:\license
+      - ${LOCAL_DATA_PATH}\cm_aspnet_temp:C:\aspnet-temp
     environment:
       BASIC_COMPANY_URL: ${CM_SITE_HOST}
       BASIC_COMPANY_DATABASE: ${CM_SITE_DATABASE}
@@ -108,5 +124,12 @@ services:
       SITECORE_LICENSE_LOCATION: C:\license\license.xml
       UNICORN_SHARED_SECRET: ${UNICORN_SHARED_SECRET}
       UNICORN_ENABLE_TRANSPARENT_SYNC: ${UNICORN_ENABLE_TRANSPARENT_SYNC}
-      SITECORE_DEVELOPMENT_PATCHES: CustomErrorsOff
-    entrypoint: ["powershell", "-Command", "& C:/tools/entrypoints/iis/Development.ps1"]
+      ASPNET_TEMP_DIRECTORY: C:\aspnet-temp
+      SITECORE_DEVELOPMENT_PATCHES: CustomErrorsOff,DiagnosticsOff,DeviceDetectionOff,RobotDetectionOff,InitMessagesOff
+    entrypoint: ["powershell", "-Command", "& C:/scripts-mounted/Start.ps1"]
+    healthcheck:
+      timeout: 3s
+      interval: 10s
+      retries: 30
+      start_period: 180s
+      start_interval: 2s

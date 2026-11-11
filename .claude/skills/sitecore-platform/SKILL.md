@@ -10,8 +10,10 @@ is on the public web. Read it from a clean installation on disk.
 
 ## First, read `config.json` next to this file
 
+Open the real file. Its shape, with placeholders instead of values:
+
 ```json
-{ "version": "10.4.1", "root": "D:/sitecore/10.4.1" }
+{ "version": "<x.y.z>", "root": "<absolute path to the unzipped platform copy>" }
 ```
 
 Both set, and `<root>/App_Config` exists: use `<root>` and carry on silently.

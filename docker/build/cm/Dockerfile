@@ -31,3 +31,4 @@ COPY --from=solution \artifacts\transforms\ \transforms\solution\
 
 # Perform solution transforms
 RUN Get-ChildItem C:\transforms\solution\Foundation\*\website | ForEach-Object { & C:\tools\scripts\Invoke-XdtTransform.ps1 -Path .\ -XdtPath $_.FullName };
+COPY .\Start.ps1 \scripts\Start.ps1
